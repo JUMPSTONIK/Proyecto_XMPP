@@ -67,6 +67,7 @@ class Client(slixmpp.ClientXMPP):
 
     def message(self, msg):
         if msg['type'] in ('chat', 'normal'):
+            print('se ha conectado')
             msg.reply("Thanks for sending\n%(body)s" % msg).send()
 
 
@@ -85,8 +86,9 @@ if __name__ == '__main__':
             xmpp.register_plugin('xep_0004') # Data Forms
             xmpp.register_plugin('xep_0060') # PubSub
             xmpp.register_plugin('xep_0199') # XMPP Ping
-            if xmpp.connect():
-                xmpp.process(block=False)
+            #print(xmpp.connect())
+            if xmpp.connect() == None:
+                xmpp.process()
                 access = True
                 print("login Listo")
                 while access:
@@ -135,6 +137,7 @@ if __name__ == '__main__':
             xmpp['xep_0077'].force_registration = True
             xmpp.connect()
             xmpp.process()
+            print("usuario creado")
         if eleccion == '3':
             userJID = input("userJID: ")
             password = input("password: ")
