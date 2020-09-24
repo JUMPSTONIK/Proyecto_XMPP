@@ -30,10 +30,10 @@ class RegisterBot(slixmpp.ClientXMPP):
         self.add_event_handler("session_start", self.start)
         self.add_event_handler("register", self.register)
 
-    def start(self, event):
+    async def start(self, event):
         
         self.send_presence()
-        self.get_roster()
+        await self.get_roster()
         self.disconnect()
 
     async def register(self, iq):
@@ -53,22 +53,61 @@ class RegisterBot(slixmpp.ClientXMPP):
         except IqTimeout:
             print("No response from server.")
             self.disconnect()
+        self.disconnect()
 
 class Client(slixmpp.ClientXMPP):
 
     def __init__(self, jid, password):
         slixmpp.ClientXMPP.__init__(self, jid, password)
+        #print('algo pasa')
         self.add_event_handler("session_start", self.start)
-        self.add_event_handler("message", self.message)
+        #self.add_event_handler(self.login)
+        self.register_plugin('xep_0030') # Service Discovery
+        self.register_plugin('xep_0004') # Data Forms
+        self.register_plugin('xep_0060') # PubSub
+        self.register_plugin('xep_0199') # XMPP Ping
 
     async def start(self, event):
         self.send_presence()
         await self.get_roster()
 
-    def message(self, msg):
-        if msg['type'] in ('chat', 'normal'):
-            print('se ha conectado')
-            msg.reply("Thanks for sending\n%(body)s" % msg).send()
+        access = True
+        print('se ha conectado\n')
+        print("login Listo\n")
+        while access:
+            print("elija una de las siguientes opciones: \n1. Mostrar todos los usuarios y su estado \n2. Agregar un usuario a sus contactos \n3. Mostrar detalles de contacto de un usuario \n4. Comunicacion 1 a 1 con algun usuario \n5. participar en conversacion grupal \n6. salir ")
+            opcion = input("opcion a elegir es: ")
+            if opcion == "1":
+                #codigo para mostrar usuarios
+                print("1")
+            if opcion == "2":
+                #codigo para agregar contanto
+                new_friend = (input("user: "))
+                xmpp.send_presence_subscription(pto= new_friend + "@redes2020.xyz")
+                print("Amigo agregado")
+                #print("2")
+            if opcion == "3":
+                #codigo para mostrar detalles de un contanto
+                print("3")
+            if opcion == "4":
+                #codigo para iniciar conversacion 1 a 1 con otro usuario
+                print("4")
+            if opcion == "5":
+                #codigo para añadirme a un chat grupal
+                print("5")
+            if opcion == "6":
+                #codigo para el mensaje de presencia
+                shw = input("Estado(chat, away, xa, dnd): ")
+                stts = input("Mensaje: ")
+                self.send_presence(pshow= shw, pstatus= stts)
+                print("Presence cambiado\n")
+            if opcion == "7":
+                self.disconnect()
+                access = False
+            if opcion != "1" or opcion != "2" or opcion != "3" or opcion != "4" or opcion != "5" or opcion != "6": 
+                print("ha escrito mala su eleccion. Por favor, intentelo y sin dejar espacios en blanco")
+
+
 
 
 if __name__ == '__main__':
@@ -82,38 +121,10 @@ if __name__ == '__main__':
             userJID = input("userJID: ")
             password = input("password: ")
             xmpp = Client(userJID + "@redes2020.xyz", password)
-            xmpp.register_plugin('xep_0030') # Service Discovery
-            xmpp.register_plugin('xep_0004') # Data Forms
-            xmpp.register_plugin('xep_0060') # PubSub
-            xmpp.register_plugin('xep_0199') # XMPP Ping
+            
             #print(xmpp.connect())
             if xmpp.connect() == None:
                 xmpp.process()
-                access = True
-                print("login Listo")
-                while access:
-                    print("elija una de las siguientes opciones: \n1. Mostrar todos los usuarios y su estado \n2. Agregar un usuario a sus contactos \n3. Mostrar detalles de contacto de un usuario \n4. Comunicacion 1 a 1 con algun usuario \n5. participar en conversacion grupal \n6. salir ")
-                    opcion = input("opcion a elegir es: ")
-                    if opcion == "1":
-                        #codigo para mostrar usuarios
-                        print("1")
-                    if opcion == "2":
-                        #codigo para agregar contanto
-                        print("2")
-                    if opcion == "3":
-                        #codigo para mostrar detalles de un contanto
-                        print("3")
-                    if opcion == "4":
-                        #codigo para iniciar conversacion 1 a 1 con otro usuario
-                        print("4")
-                    if opcion == "5":
-                        #codigo para añadirme a un chat grupal
-                        print("5")
-                    if opcion == "6":
-                        xmpp.disconnect()
-                        access = False
-                    if opcion != "1" or opcion != "2" or opcion != "3" or opcion != "4" or opcion != "5" or opcion != "6": 
-                        print("ha escrito mala su eleccion. Por favor, intentelo y sin dejar espacios en blanco")
             else:
                 print("Unable to connect.")
 
@@ -136,7 +147,7 @@ if __name__ == '__main__':
             xmpp.register_plugin('xep_0077') # In-band Registration
             xmpp['xep_0077'].force_registration = True
             xmpp.connect()
-            xmpp.process()
+            #xmpp.process()
             print("usuario creado")
         if eleccion == '3':
             userJID = input("userJID: ")
