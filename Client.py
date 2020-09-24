@@ -31,13 +31,13 @@ class RegisterBot(slixmpp.ClientXMPP):
         self.add_event_handler("register", self.register)
 
     async def start(self, event):
-        
+
         self.send_presence()
         await self.get_roster()
         self.disconnect()
 
     async def register(self, iq):
-        
+
         resp = self.Iq()
         resp['type'] = 'set'
         resp['register']['username'] = self.boundjid.user
@@ -57,29 +57,78 @@ class RegisterBot(slixmpp.ClientXMPP):
 
 class Client(slixmpp.ClientXMPP):
 
-    def __init__(self, jid, password):
-        slixmpp.ClientXMPP.__init__(self, jid, password)
+    def __init__(self, user, passw):
+        slixmpp.ClientXMPP.__init__(self, user, passw)
         #print('algo pasa')
+        self.jid = user
+        self.password = passw
         self.add_event_handler("session_start", self.start)
         #self.add_event_handler(self.login)
         self.register_plugin('xep_0030') # Service Discovery
         self.register_plugin('xep_0004') # Data Forms
         self.register_plugin('xep_0060') # PubSub
         self.register_plugin('xep_0199') # XMPP Ping
+        self.add_event_handler("changed_status", self.wait_for_presences)
+
+        self.received = set()
+        self.presences_received = asyncio.Event()
+
+    def wait_for_presences(self, pres):
+        """
+        Track how many roster entries have received presence updates.
+        """
+        self.received.add(pres['from'].bare)
+        if len(self.received) >= len(self.client_roster.keys()):
+            self.presences_received.set()
+        else:
+            self.presences_received.clear()
 
     async def start(self, event):
         self.send_presence()
-        await self.get_roster()
+        #await self.get_roster()
 
         access = True
         print('se ha conectado\n')
         print("login Listo\n")
         while access:
-            print("elija una de las siguientes opciones: \n1. Mostrar todos los usuarios y su estado \n2. Agregar un usuario a sus contactos \n3. Mostrar detalles de contacto de un usuario \n4. Comunicacion 1 a 1 con algun usuario \n5. participar en conversacion grupal \n6. salir ")
+            print("elija una de las siguientes opciones: \n1. Mostrar todos los usuarios y su estado \n2. Agregar un usuario a sus contactos \n3. Mostrar detalles de contacto de un usuario \n4. Comunicacion 1 a 1 con algun usuario \n5. participar en conversacion grupal \n6. mensaje de precencia \n7. salir ")
             opcion = input("opcion a elegir es: ")
             if opcion == "1":
                 #codigo para mostrar usuarios
-                print("1")
+                try:
+                    await self.get_roster()
+                except IqError as err:
+                    print('Error: %s' % err.iq['error']['condition'])
+                except IqTimeout:
+                    print('Error: Request timed out')
+                self.send_presence()
+
+                print('Waiting for presence updates...\n')
+                await asyncio.sleep(10)
+
+                print('Roster for %s' % self.boundjid.bare)
+                groups = self.client_roster.groups()
+                for group in groups:
+                    print('\n%s' % group)
+                    print('-' * 72)
+                    for self.jid in groups[group]:
+                        sub = self.client_roster[self.jid]['subscription']
+                        name = self.client_roster[self.jid]['name']
+                        if self.client_roster[self.jid]['name']:
+                            print(' %s (%s) [%s]' % (name, self.jid, sub))
+                        else:
+                            print(' %s [%s]' % (self.jid, sub))
+
+                        connections = self.client_roster.presence(self.jid)
+                        for res, pres in connections.items():
+                            show = 'available'
+                            if pres['show']:
+                                show = pres['show']
+                            print('   - %s (%s)' % (res, show))
+                            if pres['status']:
+                                print('       %s' % pres['status'])
+
+                #print("1")
             if opcion == "2":
                 #codigo para agregar contanto
                 new_friend = (input("user: "))
@@ -102,10 +151,13 @@ class Client(slixmpp.ClientXMPP):
                 self.send_presence(pshow= shw, pstatus= stts)
                 print("Presence cambiado\n")
             if opcion == "7":
-                self.disconnect()
                 access = False
-            if opcion != "1" or opcion != "2" or opcion != "3" or opcion != "4" or opcion != "5" or opcion != "6": 
+                print("entraste")
+                break
+            if opcion != "1" or opcion != "2" or opcion != "3" or opcion != "4" or opcion != "5" or opcion != "6" or opcion != "7": 
                 print("ha escrito mala su eleccion. Por favor, intentelo y sin dejar espacios en blanco")
+        print("saliste")
+        self.disconnect()
 
 
 
@@ -121,7 +173,7 @@ if __name__ == '__main__':
             userJID = input("userJID: ")
             password = input("password: ")
             xmpp = Client(userJID + "@redes2020.xyz", password)
-            
+
             #print(xmpp.connect())
             if xmpp.connect() == None:
                 xmpp.process()
@@ -137,10 +189,10 @@ if __name__ == '__main__':
             password = input("password: ")
 
             xmpp = RegisterBot(userJID + "@redes2020.xyz", password)
-            
+
             # Some servers don't advertise support for inband registration, even
             # though they allow it. If this applies to your server, use:
-            
+
             xmpp.register_plugin('xep_0030') # Service Discovery
             xmpp.register_plugin('xep_0004') # Data forms
             xmpp.register_plugin('xep_0066') # Out-of-band Data
