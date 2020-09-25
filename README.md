@@ -1,85 +1,81 @@
-# Proyecto XMPP
+# XMPP project
 
-_Este es un proyecto para la clase de Redes que consta del uso del protocolo xmpp. Se busca que el estudiante desarrollara un cliente que implementara dicho protocolo y las siguientes funcionalidades:_
+_This is a project for the Networks class that consists of the use of the xmpp protocol. It is intended that the student develop a client that will implement said protocol and the following functionalities: _
 
-Administración de cuenta (25% del funcionamiento)
+Account management (25% of operation)
 
-● Registrar una nueva cuenta en el servidor.
+● Register a new account on the server.
 
-● Iniciar sesión con una cuenta.
+● Sign in with an account.
 
-● Cerrar sesión con una cuenta.
+● Log out with an account.
 
-● Eliminar la cuenta del servidor.
+● Delete the account from the server.
 
-Comunicación (75% del funcionamiento)
+Communication (75% of operation)
 
-● Mostrar todos los usuarios / contactos y su estado.
+● Show all users / contacts and their status.
 
-● Agregar un usuario a los contactos.
+● Add a user to contacts.
 
-● Mostrar detalles de contacto de un usuario.
+● Show contact details of a user.
 
-● Comunicación 1 a 1 con cualquier usuario / contacto.
+● 1 to 1 communication with any user / contact.
 
-● Participar en conversaciones grupales.
+● Participate in group conversations.
 
-● Definir mensaje de presencia.
+● Define presence message.
 
-● Enviar / recibir notificaciones.
+● Send / receive notifications.
 
-● Enviar / recibir archivos.
+● Send / receive files.
 
 
-## Comenzando 🚀
+## Starting 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+_These instructions will allow you to get a copy of the project running on your local machine for development and testing purposes.
 
-### Pre-requisitos 📋
+### Pre-requisites 📋
 
-_Se requiere que primero se descargue el repositorio con el cliente usando el siguiente comando_
+_It is required to first download the repository with the client using the following command_
 
-```
+''
 git clone https://github.com/JUMPSTONIK/Proyecto_XMPP.git
-```
-_Luego deber de instalar las siguientes librerias para poder correr el proyecto en caso no las tenga_
+''
+_Then you must install the following libraries to be able to run the project in case you don't have them_
 
-```
+''
 pip install slixmpp
 pip install asyncio
-```
-## Ejecutando las pruebas ⚙️
+''
+## Running the tests ⚙️
 
-_Para poder ejecutar el proyeto solo se requiere estar en la carpeta del proyecto y luego ejecutar el siguiente comando en su cmd_
+_To be able to execute the project it is only required to be in the project folder and then execute the following command in your cmd_
 
-### ejecucion🔩
+### execution🔩
 
-_Se recomiendo hacer las pruebas del proyecto en un sistema Windows_
+_It is recommended to test the project on a Windows system_
 
-```
-python Client.py
-```
+''
+Python Client.py
+''
 
 ## Wiki 📖
 
-Puedes encontrar mas acerca de como se desarrollo este proyecto gracias a los ejemplos dados por el repositorio del proyecto de slixmpp, con los cuales se desarrollo usando codigo de los mismos. [Examples](https://github.com/poezio/slixmpp/tree/master/examples)
+You can find more about how this project was developed thanks to the examples given by the slixmpp project repository, with which it was developed using their code. [Examples] (https://github.com/poezio/slixmpp/tree/master/examples)
 
-## Construido con 🛠️
+## Built with 🛠️
 
-* [Slixmpp](https://slixmpp.readthedocs.io/index.html/) - Libreria utilizada para manejar xmpp
-* [Python](https://www.python.org/) - Lenguaje utilizado en el desarrollo del proyecto
-* [XMPP](https://xmpp.org/) - Protocolo utilizado en el proyecto
-## Autores ✒️
+* [Slixmpp] (https://slixmpp.readthedocs.io/index.html/) - Library used to handle xmpp
+* [Python] (https://www.python.org/) - Language used in the development of the project
+* [XMPP] (https://xmpp.org/) - Protocol used in the project
+## Authors ✒️
 
-_Desarrollado principalmente por:_
+_Mainly developed by: _
 
-* **Josue David Lopez Florian** - *Proyecto en general* - [perfil](https://github.com/JUMPSTONIK)
+* ** Josue David Lopez Florian ** - * Project in general * - [profile] (https://github.com/JUMPSTONIK)
 
-_Con el apoyo de:_
+_With the support of: _
 
-* **Dieter de Wit** - *apoyo al desarrollo como axiliar*
-* **Vinicio Paz** - *apoyo como maestro guia*
-
-
-
-
+* ** Dieter de Wit ** - * development support as axillary *
+* ** Vinicio Paz ** - * support as a teacher guide *
