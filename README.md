@@ -71,11 +71,11 @@ You can find more about how this project was developed thanks to the examples gi
 * [XMPP](https://xmpp.org/) - Protocol used in the project
 ## Authors ✒️
 
-_Mainly developed by: _
+_Mainly developed by:_
 
 * **Josue David Lopez Florian** - *Project in general* - [profile](https://github.com/JUMPSTONIK)
 
-_With the support of: _
+_With the support of:_
 
 * **Dieter de Wit** - *development support as axillary*
 * **Vinicio Paz** - *support as a teacher guide*
