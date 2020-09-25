@@ -2,19 +2,33 @@
 
 _Este es un proyecto para la clase de Redes que consta del uso del protocolo xmpp. Se busca que el estudiante desarrollara un cliente que implementara dicho protocolo y las siguientes funcionalidades:_
 _Administración de cuenta (25% del funcionamiento)_
+
 ● Registrar una nueva cuenta en el servidor.
+
 ● Iniciar sesión con una cuenta.
+
 ● Cerrar sesión con una cuenta.
+
 ● Eliminar la cuenta del servidor.
+
 Comunicación (75% del funcionamiento)
+
 ● Mostrar todos los usuarios / contactos y su estado.
+
 ● Agregar un usuario a los contactos.
+
 ● Mostrar detalles de contacto de un usuario.
+
 ● Comunicación 1 a 1 con cualquier usuario / contacto.
+
 ● Participar en conversaciones grupales.
+
 ● Definir mensaje de presencia.
+
 ● Enviar / recibir notificaciones.
+
 ● Enviar / recibir archivos.
+
 
 ## Comenzando 🚀
 
