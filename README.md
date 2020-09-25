@@ -73,9 +73,9 @@ You can find more about how this project was developed thanks to the examples gi
 
 _Mainly developed by: _
 
-* ** Josue David Lopez Florian ** - * Project in general * - [profile] (https://github.com/JUMPSTONIK)
+* **Josue David Lopez Florian** - *Project in general* - [profile] (https://github.com/JUMPSTONIK)
 
 _With the support of: _
 
-* ** Dieter de Wit ** - * development support as axillary *
-* ** Vinicio Paz ** - * support as a teacher guide *
+* **Dieter de Wit** - *development support as axillary*
+* **Vinicio Paz** - *support as a teacher guide*
