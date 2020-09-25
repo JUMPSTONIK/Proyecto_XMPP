@@ -39,15 +39,15 @@ _These instructions will allow you to get a copy of the project running on your 
 
 _It is required to first download the repository with the client using the following command_
 
-''
+```
 git clone https://github.com/JUMPSTONIK/Proyecto_XMPP.git
-''
+```
 _Then you must install the following libraries to be able to run the project in case you don't have them_
 
-''
+```
 pip install slixmpp
 pip install asyncio
-''
+```
 ## Running the tests ⚙️
 
 _To be able to execute the project it is only required to be in the project folder and then execute the following command in your cmd_
@@ -56,9 +56,9 @@ _To be able to execute the project it is only required to be in the project fold
 
 _It is recommended to test the project on a Windows system_
 
-''
+```
 Python Client.py
-''
+```
 
 ## Wiki 📖
 
