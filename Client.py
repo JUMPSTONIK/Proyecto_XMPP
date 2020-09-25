@@ -62,16 +62,35 @@ class Client(slixmpp.ClientXMPP):
         #print('algo pasa')
         self.jid = user
         self.password = passw
+        self.room = ""
+        self.nick = ""
         self.add_event_handler("session_start", self.start)
         #self.add_event_handler(self.login)
         self.register_plugin('xep_0030') # Service Discovery
+        self.register_plugin('xep_0045') # Multi-User Chat
         self.register_plugin('xep_0004') # Data Forms
         self.register_plugin('xep_0060') # PubSub
         self.register_plugin('xep_0199') # XMPP Ping
         self.add_event_handler("changed_status", self.wait_for_presences)
+        self.add_event_handler("groupchat_message", self.muc_message)
 
         self.received = set()
         self.presences_received = asyncio.Event()
+
+    def muc_message(self, msg):
+
+        if msg['mucnick'] != self.nick and self.nick in msg['body']:
+            self.send_message(mto=msg['from'].bare,
+                              mbody="I heard that, %s." % msg['mucnick'],
+                              mtype='groupchat')
+
+    def muc_online(self, presence):
+
+        if presence['muc']['nick'] != self.nick:
+            self.send_message(mto=presence['from'].bare,
+                              mbody="Hello, %s %s" % (presence['muc']['role'],
+                                                      presence['muc']['nick']),
+                              mtype='groupchat')
 
     def wait_for_presences(self, pres):
         """
@@ -137,12 +156,39 @@ class Client(slixmpp.ClientXMPP):
                 #print("2")
             if opcion == "3":
                 #codigo para mostrar detalles de un contanto
+                print("ingrese el nombre sel usuario de quien quiere saber su estatus\n")
+                userSt =  input("nombre del usuario: ")
+                userSt = userSt + "redes2020.xyz"
+                #self.send_presence()
+                await self.get_roster()
+                self.client_roster
+                print("Aqui esta: ", self.client_roster.presence(userSt))
                 print("3")
             if opcion == "4":
-                #codigo para iniciar conversacion 1 a 1 con otro usuario
+                #codigo para enviar un mensaje 1 a 1 con otro usuario
+                Userto = input("ingrese el nombre el usuario a quien va dirigido el mensaje: ")
+                mensaje = input("ingrese el mensaje que desea enviar")
+                self.send_message(mto= Userto + "@redes2020.xyz",
+                          mbody=self.msg,
+                          mtype='chat')
                 print("4")
             if opcion == "5":
-                #codigo para añadirme a un chat grupal
+                #codigo para añadirme a un chat grupal y enviar un mensaje
+                print("vamos a ingresar a un room\n")
+                self.nick = input("ingrese el nombre con le que quiere aparecer en el room")
+                self.room = nick + "@conference.redes2020.xyz"
+                self.add_event_handler("muc::%s::got_online" % self.room,self.muc_online)
+                await self.get_roster()
+                self.send_presence()
+                self.plugin['xep_0045'].join_muc(self.room,
+                                         self.nick,
+                                         # If a room password is needed, use:
+                                         # password=the_room_password,
+                                         wait=True)
+
+                mensaje = input("mensaje a enviar: ")
+                self.muc_message(mensaje)
+
                 print("5")
             if opcion == "6":
                 #codigo para el mensaje de presencia
