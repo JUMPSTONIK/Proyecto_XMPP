@@ -1,7 +1,8 @@
-# Título del Proyecto
+# Proyecto XMPP
 
 _Este es un proyecto para la clase de Redes que consta del uso del protocolo xmpp. Se busca que el estudiante desarrollara un cliente que implementara dicho protocolo y las siguientes funcionalidades:_
-_Administración de cuenta (25% del funcionamiento)_
+
+Administración de cuenta (25% del funcionamiento)
 
 ● Registrar una nueva cuenta en el servidor.
 
