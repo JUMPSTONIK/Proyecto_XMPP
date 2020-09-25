@@ -33,7 +33,7 @@ Communication (75% of operation)
 
 ## Starting 🚀
 
-_These instructions will allow you to get a copy of the project running on your local machine for development and testing purposes.
+_These instructions will allow you to get a copy of the project running on your local machine for development and testing purposes._
 
 ### Pre-requisites 📋
 
@@ -62,18 +62,18 @@ Python Client.py
 
 ## Wiki 📖
 
-You can find more about how this project was developed thanks to the examples given by the slixmpp project repository, with which it was developed using their code. [Examples] (https://github.com/poezio/slixmpp/tree/master/examples)
+You can find more about how this project was developed thanks to the examples given by the slixmpp project repository, with which it was developed using their code. [Examples](https://github.com/poezio/slixmpp/tree/master/examples)
 
 ## Built with 🛠️
 
-* [Slixmpp] (https://slixmpp.readthedocs.io/index.html/) - Library used to handle xmpp
-* [Python] (https://www.python.org/) - Language used in the development of the project
-* [XMPP] (https://xmpp.org/) - Protocol used in the project
+* [Slixmpp](https://slixmpp.readthedocs.io/index.html/) - Library used to handle xmpp
+* [Python](https://www.python.org/) - Language used in the development of the project
+* [XMPP](https://xmpp.org/) - Protocol used in the project
 ## Authors ✒️
 
 _Mainly developed by: _
 
-* **Josue David Lopez Florian** - *Project in general* - [profile] (https://github.com/JUMPSTONIK)
+* **Josue David Lopez Florian** - *Project in general* - [profile](https://github.com/JUMPSTONIK)
 
 _With the support of: _
 
