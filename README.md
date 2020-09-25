@@ -79,3 +79,15 @@ _With the support of:_
 
 * **Dieter de Wit** - *development support as axillary*
 * **Vinicio Paz** - *support as a teacher guide*
+
+## Dificultades 
+* Comprencion en el funcionamiento del protocolo
+* entendimiento de la documentacion y la guia para implementar las funcionalidades
+* resolucion de errores
+* estructuracion de las funcionalidades
+
+## Lecciones aprendidas
+* El uso y la implementacion de este protocolo
+* entendimiento del protocolo desde el lado del cliente
+* el manejo de diversas librerias para llevar el manejo del protocolo
+* adquisicion de un aprendisaje de algo que puedo implementar a futuro
