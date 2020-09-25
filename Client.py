@@ -198,7 +198,7 @@ class Client(slixmpp.ClientXMPP):
                 #codigo para enviar un mensaje 1 a 1 con otro usuario
                 #obtenemos el user al cual va dirigido el mensaje y el mensaje a enviar
                 Userto = input("ingrese el nombre el usuario a quien va dirigido el mensaje: ")
-                mensaje = input("ingrese el mensaje que desea enviar")
+                mensaje = input("ingrese el mensaje que desea enviar: ")
                 self.send_message(mto= Userto + "@redes2020.xyz",
                           mbody= mensaje,
                           mtype='chat')
@@ -208,7 +208,7 @@ class Client(slixmpp.ClientXMPP):
                 #codigo para añadirme a un chat grupal y enviar un mensaje
                 print("vamos a ingresar a un room\n")
                 #obtenemos el nick con el que quiere aparecer el user en el room y luego generamos la variable room
-                self.nick = input("ingrese el nombre con le que quiere aparecer en el room")
+                self.nick = input("ingrese el nombre con le que quiere aparecer en el room: ")
                 self.room = self.nick + "@conference.redes2020.xyz"
                 #agregamos un eventhandler para manejar el room y quienes ingresan
                 self.add_event_handler("muc::%s::got_online" % self.room,self.muc_online)
